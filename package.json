@@ -1,0 +1,47 @@
+{
+  "name": "firstcypresstest",
+  "version": "1.0.0",
+  "description": "Agentic Testing System - Automated web testing with 5 specialized agents",
+  "main": "index.js",
+  "bin": {
+    "agentic-test": "./index.js"
+  },
+  "scripts": {
+    "start": "node index.js",
+    "test": "npm run start",
+    "cypress:open": "cypress open",
+    "cypress:run": "cypress run",
+    "lint": "eslint . --ext .js",
+    "lint:fix": "eslint . --ext .js --fix"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/PolManSt/FirstCypressTest.git"
+  },
+  "keywords": [
+    "testing",
+    "cypress",
+    "automation",
+    "agents",
+    "web-testing"
+  ],
+  "author": "",
+  "license": "ISC",
+  "engines": {
+    "node": ">=14.0.0"
+  },
+  "type": "commonjs",
+  "bugs": {
+    "url": "https://github.com/PolManSt/FirstCypressTest/issues"
+  },
+  "homepage": "https://github.com/PolManSt/FirstCypressTest#readme",
+  "dependencies": {
+    "@langchain/openai": "^1.4.4",
+    "axios": "^1.15.0",
+    "cheerio": "^1.2.0",
+    "cypress": "^15.13.1",
+    "inquirer": "^13.4.1",
+    "langchain": "^1.3.3",
+    "puppeteer": "^24.41.0"
+  }
+}
