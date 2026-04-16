@@ -60,7 +60,7 @@ class WebAnalyzerAgent extends BaseAgent {
       });
 
       // Wait a bit for dynamic content
-      await page.waitForTimeout(2000);
+      await new Promise(resolve => setTimeout(resolve, 2000));
 
       // Get page content
       const content = await page.content();
