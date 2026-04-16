@@ -1,5 +1,6 @@
 const BaseAgent = require('./BaseAgent');
-const inquirer = require('inquirer');
+const inquirerModule = require('inquirer');
+const inquirer = inquirerModule.default || inquirerModule;
 
 /**
  * Agent 1: URL Collector
