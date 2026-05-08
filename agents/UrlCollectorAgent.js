@@ -12,7 +12,7 @@ class UrlCollectorAgent extends BaseAgent {
   }
 
   async execute(input = null) {
-    this.log('Starting URL collection process');
+    console.log('Starting URL collection process');
 
     try {
       // Ask user for URL
@@ -41,7 +41,7 @@ class UrlCollectorAgent extends BaseAgent {
       ]);
 
       const url = answers.url.trim();
-      this.log(`Collected URL: ${url}`);
+      console.log(`Collected URL: ${url}`);
 
       // Validate URL is accessible (basic check)
       const isValid = await this.validateUrl(url);
@@ -49,13 +49,13 @@ class UrlCollectorAgent extends BaseAgent {
         throw new Error('URL is not accessible or returns an error');
       }
 
-      this.log('URL validation successful');
+      console.log('URL validation successful');
 
       // Pass URL to next agent
       return await this.passToNext({ url });
 
     } catch (error) {
-      this.log(`Error: ${error.message}`);
+      console.log(`Error: ${error.message}`);
       throw error;
     }
   }
@@ -76,7 +76,7 @@ class UrlCollectorAgent extends BaseAgent {
       });
       return response.status >= 200 && response.status < 400;
     } catch (error) {
-      this.log(`URL validation failed: ${error.message}`);
+      console.log(`URL validation failed: ${error.message}`);
       return false;
     }
   }

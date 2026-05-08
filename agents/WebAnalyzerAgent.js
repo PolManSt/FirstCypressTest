@@ -13,7 +13,7 @@ class WebAnalyzerAgent extends BaseAgent {
 
   async execute(input) {
     const { url } = input;
-    this.log(`Analyzing web page: ${url}`);
+    console.log(`Analyzing web page: ${url}`);
 
     try {
       // Analyze the web page
@@ -22,7 +22,7 @@ class WebAnalyzerAgent extends BaseAgent {
       // Generate smoke tests based on analysis
       const smokeTests = this.generateSmokeTests(pageAnalysis);
 
-      this.log(`Generated ${smokeTests.length} smoke tests`);
+      console.log(`Generated ${smokeTests.length} smoke tests`);
 
       // Pass smoke tests to next agent
       return await this.passToNext({
@@ -32,7 +32,7 @@ class WebAnalyzerAgent extends BaseAgent {
       });
 
     } catch (error) {
-      this.log(`Error analyzing page: ${error.message}`);
+      console.log(`Error analyzing page: ${error.message}`);
       throw error;
     }
   }

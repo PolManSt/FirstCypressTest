@@ -17,20 +17,21 @@ class TestRunnerAgent extends BaseAgent {
 
   async execute(input) {
     const { testFilePath, testFileContent } = input;
-    this.log('Running test linting and execution');
+    console.log('Running test linting and execution');
 
     try {
       // Lint the test file
       const lintResult = await this.lintTestFile(testFilePath);
       if (!lintResult.passed) {
-        this.log(`Linting issues found: ${lintResult.errors.join(', ')}`);
+        console.log(`Linting issues found: ${lintResult.errors.join(', ')}`);
         // Continue anyway, as linting issues might not prevent execution
       }
 
       // Run Cypress tests
+      console.log('Running Cypress tests...');
       const testResults = await this.runCypressTests(testFilePath);
 
-      this.log(`Test execution completed. Results: ${JSON.stringify(testResults.summary)}`);
+      console.log(`Test execution completed. Results: ${JSON.stringify(testResults.summary)}`);
 
       // Pass results to next agent
       return await this.passToNext({
@@ -40,7 +41,7 @@ class TestRunnerAgent extends BaseAgent {
       });
 
     } catch (error) {
-      this.log(`Error running tests: ${error.message}`);
+      console.log(`Error running tests: ${error.message}`);
       throw error;
     }
   }
@@ -108,7 +109,7 @@ class TestRunnerAgent extends BaseAgent {
       // Run Cypress in headless mode
       const cypressCmd = `npx cypress run --spec "${testFilePath}" --headless --browser electron`;
 
-      this.log('Starting Cypress test execution...');
+      console.log('Starting Cypress test execution...');
 
       const { stdout, stderr } = await execAsync(cypressCmd, {
         timeout: 120000, // 2 minutes timeout
@@ -121,7 +122,7 @@ class TestRunnerAgent extends BaseAgent {
       return results;
 
     } catch (error) {
-      this.log(`Cypress execution failed: ${error.message}`);
+      console.log(`Cypress execution failed: ${error.message}`);
 
       // Return partial results
       return {
@@ -164,7 +165,7 @@ class TestRunnerAgent extends BaseAgent {
       };
 
       await fs.writeFile(configPath, JSON.stringify(config, null, 2));
-      this.log('Created basic Cypress configuration');
+      console.log('Created basic Cypress configuration');
     }
 
     // Ensure plugins file exists
@@ -249,7 +250,7 @@ class TestRunnerAgent extends BaseAgent {
       results.tests = testResults;
 
     } catch (error) {
-      this.log(`Error parsing Cypress output: ${error.message}`);
+      console.log(`Error parsing Cypress output: ${error.message}`);
       results.parsingError = error.message;
     }
 

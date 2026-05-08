@@ -13,7 +13,7 @@ class CypressTestCreatorAgent extends BaseAgent {
 
   async execute(input) {
     const { url, pageAnalysis, smokeTests } = input;
-    this.log('Creating Cypress test cases from smoke tests');
+    console.log('Creating Cypress test cases from smoke tests');
 
     try {
       // Generate Cypress test file content
@@ -23,7 +23,7 @@ class CypressTestCreatorAgent extends BaseAgent {
       const testFilePath = path.join(process.cwd(), 'cypress', 'integration', 'smoke-tests.spec.js');
       await fs.writeFile(testFilePath, testFileContent, 'utf8');
 
-      this.log(`Created Cypress test file: ${testFilePath}`);
+      console.log(`Created Cypress test file: ${testFilePath}`);
 
       // Pass test information to next agent
       return await this.passToNext({
@@ -35,7 +35,7 @@ class CypressTestCreatorAgent extends BaseAgent {
       });
 
     } catch (error) {
-      this.log(`Error creating Cypress tests: ${error.message}`);
+      console.log(`Error creating Cypress tests: ${error.message}`);
       throw error;
     }
   }

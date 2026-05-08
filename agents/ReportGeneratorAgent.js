@@ -13,7 +13,7 @@ class ReportGeneratorAgent extends BaseAgent {
 
   async execute(input) {
     const { url, pageAnalysis, smokeTests, testResults, lintResult } = input;
-    this.log('Generating comprehensive test report');
+    console.log('Generating comprehensive test report');
 
     try {
       // Generate report
@@ -25,7 +25,7 @@ class ReportGeneratorAgent extends BaseAgent {
       // Display report summary
       this.displayReportSummary(report);
 
-      this.log(`Report saved to: ${reportPath}`);
+      console.log(`Report saved to: ${reportPath}`);
 
       return {
         success: true,
@@ -34,7 +34,7 @@ class ReportGeneratorAgent extends BaseAgent {
       };
 
     } catch (error) {
-      this.log(`Error generating report: ${error.message}`);
+      console.log(`Error generating report: ${error.message}`);
       throw error;
     }
   }
